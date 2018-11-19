@@ -31,17 +31,19 @@ int main()
 
 
 
-	std::cout << "Using Ford Fulkerson (DFS): " << std::endl;
+	std::cout << "Paths using Ford Fulkerson (DFS): " << std::endl;
 	FFSolver->solveMaxFlow(graph, 0, 5);
 	std::cout << "The maximum flow is " << FFSolver->getMaxFlow() << std::endl;
 	std::cout << std::endl;
-	std::cout << "Using Edmonds Karp (BFS): " << std::endl;
+
+	std::cout << "Paths using Edmonds Karp (BFS): " << std::endl;
 	EKSolver->solveMaxFlow(graph, 0, 5);
 	std::cout << "The maximum flow is " << FFSolver->getMaxFlow() << std::endl;
 
 
 
 	delete FFSolver;
+	delete EKSolver;
 
 
 

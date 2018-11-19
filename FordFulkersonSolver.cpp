@@ -7,6 +7,8 @@
 
 #include <algorithm>
 #include <stack>
+#include <sstream>
+
 #include "FordFulkersonSolver.h"
 #include "Graph.h"
 
@@ -45,12 +47,20 @@ void FordFulkersonSolver::solveMaxFlow(const Graph& graph, const int s, const in
 			u = path[v];
 			path_flow = std::min(path_flow, rGraph[u][v]);
 		}
+		std::stringstream ss;
+
 		for(v = t; v != s; v = path[v])
 		{
 			u = path[v];
 			rGraph[u][v] -= path_flow;
 			rGraph[v][u] += path_flow;
+			ss << v << ",";
 		}
+		std::string path_string = ss.str();
+		path_string.pop_back();
+		std::reverse(path_string.begin(), path_string.end());
+		std::cout << path_string << std::endl;
+
 		m_max_flow += path_flow;
 	}
 }
@@ -84,7 +94,6 @@ bool FordFulkersonSolver::DFS(Graph& resGraph, const int s, const int t, std::ve
 			{
 				if(!visited[v] && resGraph[u][v] > 0)
 				{
-					std::cout << "Pushing Edge: (" << u << "," << v << ")"  << std::endl;
 					stack.push(v);
 					path[v] = u;
 				}

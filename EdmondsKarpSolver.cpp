@@ -9,6 +9,7 @@
 #include <queue>
 #include <algorithm>
 #include "EdmondsKarpSolver.h"
+#include <sstream>
 
 EdmondsKarpSolver::EdmondsKarpSolver()
 {
@@ -36,8 +37,6 @@ void EdmondsKarpSolver::solveMaxFlow(const Graph& graph, const int s, const int 
 
 	rGraph = graph;
 
-
-	// BFS finds all augmenting paths in |E| steps
 	while(BFS(rGraph, s, t, path))
 	{
 		int path_flow = std::numeric_limits<int>::max();
@@ -46,12 +45,18 @@ void EdmondsKarpSolver::solveMaxFlow(const Graph& graph, const int s, const int 
 			u = path[v];
 			path_flow = std::min(path_flow, rGraph[u][v]);
 		}
+		std::stringstream ss;
 		for(v = t; v != s; v = path[v])
 		{
 			u = path[v];
 			rGraph[u][v] -= path_flow;
 			rGraph[v][u] += path_flow;
+			ss << v << ",";
 		}
+		std::string path_string = ss.str();
+		path_string.pop_back();
+		std::reverse(path_string.begin(), path_string.end());
+		std::cout << path_string << std::endl;
 		m_max_flow += path_flow;
 	}
 
@@ -79,7 +84,6 @@ bool EdmondsKarpSolver::BFS(const Graph& resGraph, const int s, const int t, std
 
 	// BFS loop
 	// enqueue the source vertex, which is considered visited
-	// The queue should only be populated with adjacent vertices
 	while(!queue.empty())
 	{
 		// We dequeue when we're visiting the vertex
@@ -90,13 +94,11 @@ bool EdmondsKarpSolver::BFS(const Graph& resGraph, const int s, const int t, std
 		{
 			visited[u] = true;
 
-			// The inner loop will iterate over all vertices V
 			for(unsigned int v = 0; v < V; ++v)
 			{
 				if(!visited[v] && resGraph[u][v] > 0)
 				{
 					// We enqueue if a vertex has not been visited and is adjacent
-					std::cout << "Pushing Edge: (" << u << "," << v << ")"  << std::endl;
 					queue.push(v);
 					path[v] = u;
 				}
