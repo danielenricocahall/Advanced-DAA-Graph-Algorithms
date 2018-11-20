@@ -22,35 +22,35 @@ EdmondsKarpSolver::~EdmondsKarpSolver()
 }
 
 
-void EdmondsKarpSolver::solveMaxFlow(const Graph& graph, const int s, const int t)
+void EdmondsKarpSolver::solveMaxFlow(const Graph& G, const int s, const int t)
 {
 	int u, v;
 
 	// Graph is a V x V matrix
-	const int V = graph.size();
+	const int V = G.size();
 
 	std::vector<int> path;
 	path.reserve(V);
 
 	// create residual graph and populate with original capacities
-	Graph rGraph;
+	Graph G_f;
 
-	rGraph = graph;
+	G_f = G;
 
-	while(BFS(rGraph, s, t, path))
+	while(BFS(G_f, s, t, path))
 	{
 		int path_flow = std::numeric_limits<int>::max();
 		for(v = t; v != s; v = path[v])
 		{
 			u = path[v];
-			path_flow = std::min(path_flow, rGraph[u][v]);
+			path_flow = std::min(path_flow, G_f[u][v]);
 		}
 		std::stringstream ss;
 		for(v = t; v != s; v = path[v])
 		{
 			u = path[v];
-			rGraph[u][v] -= path_flow;
-			rGraph[v][u] += path_flow;
+			G_f[u][v] -= path_flow;
+			G_f[v][u] += path_flow;
 			ss << v << ",";
 		}
 		std::string path_string = ss.str();
@@ -63,10 +63,10 @@ void EdmondsKarpSolver::solveMaxFlow(const Graph& graph, const int s, const int 
 
 }
 
-bool EdmondsKarpSolver::BFS(const Graph& resGraph, const int s, const int t, std::vector<int>& path)
+bool EdmondsKarpSolver::BFS(const Graph& G_f, const int s, const int t, std::vector<int>& path)
 {
 	// Graph is V x V matrix
-	const unsigned int V = resGraph.size();
+	const unsigned int V = G_f.size();
 
 	std::vector<bool> visited;
 	std::queue<int> queue;
@@ -96,7 +96,7 @@ bool EdmondsKarpSolver::BFS(const Graph& resGraph, const int s, const int t, std
 
 			for(unsigned int v = 0; v < V; ++v)
 			{
-				if(!visited[v] && resGraph[u][v] > 0)
+				if(!visited[v] && G_f[u][v] > 0)
 				{
 					// We enqueue if a vertex has not been visited and is adjacent
 					queue.push(v);

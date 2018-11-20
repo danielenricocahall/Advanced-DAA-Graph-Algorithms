@@ -17,8 +17,8 @@ class FordFulkersonSolver : public MaxFlowSolver
 public:
 	FordFulkersonSolver();
 	virtual ~FordFulkersonSolver();
-	void solveMaxFlow(const Graph& graph, const int s, const int t);
-	bool DFS(Graph& resGraph, const int s, const int t, std::vector<int>& path);
+	void solveMaxFlow(const Graph& G, const int s, const int t);
+	bool DFS(Graph& G_f, const int s, const int t, std::vector<int>& path);
 };
 
 

@@ -17,8 +17,8 @@ class EdmondsKarpSolver : public MaxFlowSolver
 public:
 	EdmondsKarpSolver();
 	virtual ~EdmondsKarpSolver();
-	void solveMaxFlow(const Graph& graph, const int s, const int t);
-	bool BFS(const Graph& resGraph,
+	void solveMaxFlow(const Graph& G, const int s, const int t);
+	bool BFS(const Graph& G_f,
 			const int s,
 			const int t,
 			std::vector<int>& path);
