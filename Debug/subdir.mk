@@ -6,20 +6,17 @@
 CPP_SRCS += \
 ../Driver.cpp \
 ../EdmondsKarpSolver.cpp \
-../FordFulkersonSolver.cpp \
-../Vertex.cpp 
+../FordFulkersonSolver.cpp 
 
 OBJS += \
 ./Driver.o \
 ./EdmondsKarpSolver.o \
-./FordFulkersonSolver.o \
-./Vertex.o 
+./FordFulkersonSolver.o 
 
 CPP_DEPS += \
 ./Driver.d \
 ./EdmondsKarpSolver.d \
-./FordFulkersonSolver.d \
-./Vertex.d 
+./FordFulkersonSolver.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

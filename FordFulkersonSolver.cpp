@@ -26,7 +26,7 @@ void FordFulkersonSolver::solveMaxFlow(const Graph& G, const int s, const int t)
 {
 	int u, v;
 
-	// Graph is a V x V matrix
+	// Graph is a V x V matrix)
 	const int V = G.size();
 
 	std::vector<int> path;
@@ -65,7 +65,7 @@ void FordFulkersonSolver::solveMaxFlow(const Graph& G, const int s, const int t)
 	}
 }
 
-bool FordFulkersonSolver::DFS(Graph& G_f, const int s, const int t, std::vector<int>& path)
+bool FordFulkersonSolver::DFS(const Graph& G_f, const int s, const int t, std::vector<int>& path)
 {
 	// Graph is V x V matrix
 	const unsigned int V = G_f.size();
