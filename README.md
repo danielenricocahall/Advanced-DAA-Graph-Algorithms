@@ -1,6 +1,6 @@
 # Ford-Fulkerson-and-Edmonds-Karp-Implementation
 
-The Ford-Fulkerson algorithm is a solution to the maximum flow problem, which requires optimizing (maximizing) the flow from a source node s to a sink node t, with a few assumptions:
+The Ford-Fulkerson method is a solution to the maximum flow problem, which requires optimizing (maximizing) the flow from a source node s to a sink node t, with a few assumptions:
 * s produces material at a constant rate, and t consumes material at the same rate
 * The flow between any two nodes in the network (u, v) is the rate at which material moves 
 
